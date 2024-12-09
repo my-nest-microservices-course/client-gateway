@@ -1,0 +1,37 @@
+
+### Create new order
+POST http://localhost:3000/api/orders
+Content-Type: application/json
+
+{
+    "items": 
+    [
+        {
+        # "productId": 1000, # this id dont exist and will throw a concatenation error
+        "productId": 2,
+        "price": 50,
+        "quantity": 2
+        },
+        {
+            "productId": 1,
+            "price": 50,
+            "quantity": 2
+        }
+    ]
+}
+
+### Get order by ID
+GET http://localhost:3000/api/orders/a0f9c4eb-129a-4591-b8d1-ecd08283da51
+Content-Type: application/json
+
+### Get all orders
+GET http://localhost:3000/api/orders?limit=10&offset=0
+Content-Type: application/json
+
+### Update order by ID
+PATCH http://localhost:3000/api/orders/a0f9c4eb-129a-4591-b8d1-ecd08283da51
+Content-Type: application/json
+
+{
+    "status": "CANCELLED"
+}
