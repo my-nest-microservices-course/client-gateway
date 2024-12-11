@@ -13,37 +13,29 @@ import {
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
 import { PaginationDto } from '../common/dto/pagination.dto';
-import { PRODUCT_SERVICE } from '../config';
+import { NATS_SERVICE } from '../config';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
 @Controller('products')
 export class ProductsController {
-  constructor(
-    @Inject(PRODUCT_SERVICE) private readonly productsClient: ClientProxy,
-  ) {}
+  constructor(@Inject(NATS_SERVICE) private readonly client: ClientProxy) {}
 
   @Post()
   createProducts(@Body() createProductDto: CreateProductDto) {
-    return this.productsClient.send(
-      { cmd: 'create-product' },
-      createProductDto,
-    );
+    return this.client.send({ cmd: 'create-product' }, createProductDto);
   }
 
   @Get()
   findAllProducts(@Query() paginationDto: PaginationDto) {
-    return this.productsClient.send(
-      { cmd: 'find-all-products' },
-      paginationDto,
-    );
+    return this.client.send({ cmd: 'find-all-products' }, paginationDto);
   }
 
   @Get(':id')
   async findOneProducts(@Param('id', ParseIntPipe) id: string) {
     try {
       return await firstValueFrom(
-        this.productsClient.send({ cmd: 'find-one-product' }, { id }),
+        this.client.send({ cmd: 'find-one-product' }, { id }),
       );
     } catch (error) {
       throw new RpcException(error);
@@ -54,7 +46,7 @@ export class ProductsController {
   async removeProducts(@Param('id', ParseIntPipe) id: number) {
     try {
       return await firstValueFrom(
-        this.productsClient.send({ cmd: 'remove-product' }, { id }),
+        this.client.send({ cmd: 'remove-product' }, { id }),
       );
     } catch (error) {
       throw new RpcException(error);
@@ -68,7 +60,7 @@ export class ProductsController {
   ) {
     try {
       return await firstValueFrom(
-        this.productsClient.send(
+        this.client.send(
           { cmd: 'update-product' },
           { id, ...updateProductDto },
         ),

@@ -12,7 +12,7 @@ import {
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { UUID } from 'crypto';
 import { firstValueFrom } from 'rxjs';
-import { ORDERS_SERVICE } from 'src/config';
+import { NATS_SERVICE } from 'src/config';
 
 import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderPaginationDto } from './dto/order-pagination.dto';
@@ -20,14 +20,12 @@ import { StatusDTO } from './dto/status.dto';
 
 @Controller('orders')
 export class OrdersController {
-  constructor(
-    @Inject(ORDERS_SERVICE) private readonly ordersClient: ClientProxy,
-  ) {}
+  constructor(@Inject(NATS_SERVICE) private readonly client: ClientProxy) {}
 
   @Post()
   async createOrder(@Body() createOrderDto: CreateOrderDto) {
     try {
-      return this.ordersClient.send({ cmd: 'create-order' }, createOrderDto);
+      return this.client.send({ cmd: 'create-order' }, createOrderDto);
     } catch (error) {
       throw new RpcException(error);
     }
@@ -37,7 +35,7 @@ export class OrdersController {
   async findAllOrders(@Query() paginationDto: OrderPaginationDto) {
     try {
       return await firstValueFrom(
-        this.ordersClient.send({ cmd: 'find-all-orders' }, paginationDto),
+        this.client.send({ cmd: 'find-all-orders' }, paginationDto),
       );
     } catch (error) {
       throw new RpcException(error);
@@ -48,7 +46,7 @@ export class OrdersController {
   async findOne(@Param('id', ParseUUIDPipe) id: UUID) {
     try {
       return await firstValueFrom(
-        this.ordersClient.send({ cmd: 'find-one-order' }, id),
+        this.client.send({ cmd: 'find-one-order' }, id),
       );
     } catch (error) {
       throw new RpcException(error);
@@ -61,7 +59,7 @@ export class OrdersController {
   ) {
     try {
       return await firstValueFrom(
-        this.ordersClient.send(
+        this.client.send(
           { cmd: 'change-order-status' },
           { id, status: statusDto.status },
         ),

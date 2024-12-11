@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### Get order by ID
-GET http://localhost:3000/api/orders/a0f9c4eb-129a-4591-b8d1-ecd08283da51
+GET http://localhost:3000/api/orders/036daf0e-0997-480b-954e-af6137df74ae
 Content-Type: application/json
 
 ### Get all orders
