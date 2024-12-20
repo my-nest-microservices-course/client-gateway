@@ -13,7 +13,6 @@ import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { UUID } from 'crypto';
 import { firstValueFrom } from 'rxjs';
 import { NATS_SERVICE } from 'src/config';
-
 import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderPaginationDto } from './dto/order-pagination.dto';
 import { StatusDTO } from './dto/status.dto';

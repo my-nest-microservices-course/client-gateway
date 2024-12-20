@@ -1,8 +1,8 @@
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { envs } from './config';
-import { Logger, ValidationPipe } from '@nestjs/common';
 import { RpcCustomExceptionFilter } from './common/exceptions/rpc-exception.filter';
+import { envs } from './config';
 
 async function bootstrap() {
   const logger = new Logger('Gateway');
@@ -19,4 +19,5 @@ async function bootstrap() {
   await app.listen(envs.port);
   logger.log(`Gateway microservice running on port: ${envs.port}`);
 }
+
 bootstrap();

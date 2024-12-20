@@ -29,7 +29,7 @@ GET http://localhost:3000/api/orders?limit=10&offset=0
 Content-Type: application/json
 
 ### Update order by ID
-PATCH http://localhost:3000/api/orders/a0f9c4eb-129a-4591-b8d1-ecd08283da51
+PATCH http://localhost:3000/api/orders/bbe8e8dc-14e1-4f88-a26a-32ceaa3f74a1
 Content-Type: application/json
 
 {
