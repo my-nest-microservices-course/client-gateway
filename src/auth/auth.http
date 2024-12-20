@@ -1,0 +1,26 @@
+
+
+###
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email": "eze@gmail.com",
+    "password": "123"
+    "name":"eze",
+}
+    
+
+###
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "eze@gmail.com",
+    "password": "123"
+}
+
+### 
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjQ1Y2M5ZTM3NzZhMTk2MzQyZWY5NyIsImVtYWlsIjoiZXplQGdtYWlsLmNvbSIsIm5hbWUiOiJlemUiLCJpYXQiOjE3MzQ2MzgxNjB9.eGLwbfnr3jqAodgnZVjk8oNj1eAljBkuLRmvLXEU5lI
+GET http://localhost:3000/api/auth/verify
+Authorization: Bearer {{token}}
