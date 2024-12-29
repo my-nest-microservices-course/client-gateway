@@ -1,11 +1,11 @@
 
 ### Get all products
-GET http://localhost:3000/api/products
+GET http://localhost:30440/api/products
 Content-Type: "application/json"
 
 
 ### Get one product by id
-GET http://localhost:3000/api/products/1
+GET http://localhost:30440/api/products/1
 Content-Type: "application/json"
 
 

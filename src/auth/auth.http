@@ -1,18 +1,18 @@
 
 
-###
-POST http://localhost:3000/api/auth/register
+### CREATE NEW USER
+POST http://localhost:30440/api/auth/register
 Content-Type: application/json
 
 {
     "email": "eze@gmail.com",
-    "password": "123"
-    "name":"eze",
+    "password": "123",
+    "name":"eze"
 }
     
 
-###
-POST http://localhost:3000/api/auth/login
+### LOGIN
+POST http://localhost:30440/api/auth/login
 Content-Type: application/json
 
 {
